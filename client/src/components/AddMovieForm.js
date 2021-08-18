@@ -4,61 +4,54 @@
  * Unit 3.3.3 axios get/put/delete
  * 8/18/2021
 **/
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
 
-const EditMovieForm = (props) => {
+const AddMovieForm = (props) => {
+    //For pushing to updated movie form
 	const { push } = useHistory();
+	
 	//useParams to get the id
 	const { id } = useParams();
+
 	//Passing in setMovies as props, 
-	//Change setMovie to setMovies to change state across the app
 	const {setMovies} = props;
 
+    //Initial state
 	const [movie, setMovie] = useState({
 		title:"",
 		director: "",
 		genre: "",
 		metascore: 0,
-		description: ""
+		description: "",
+       
 	});
 
-	//Get the information for the item we are editing., pass in id
-	//This will load the selected movie details into the edit form
-	useEffect(()=>{	
-		axios.get(`http://localhost:5000/api/movies/${id}`)
-		  .then(res=> {
-			setMovie(res.data);
-		  })
-
-		  .catch(err=> {
-			console.log(err);
-		  });
-	  }, []);
-
-
+    //Change handler
 	const handleChange = (e) => {
+        //Sets movies
         setMovie({
+            //Spreads in current values
             ...movie,
             [e.target.name]: e.target.value
         });
     }
 	
 
+    //Submit handler
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		axios.put(`http://localhost:5000/api/movies/${id}`, movie)
+        //Call the api, NO id
+		axios.post(`http://localhost:5000/api/movies/`, movie)
 			.then(res=> {
-
-			console.log("SUBMIT>>>", res.data)
 			//Set the movies, push to the newly edited form
 			//Change setMovie to setMovies to save state across form
 			setMovies(res.data);
-			push(`/movies/${id}`);
+            console.log("SUBMIT!")
+			push(`/movies/`);
 			})
 			.catch(err=> {
 				console.log(err);
@@ -66,6 +59,7 @@ const EditMovieForm = (props) => {
 	}
 
 
+	
 	const { title, director, genre, metascore, description } = movie;
 
     return (
@@ -107,4 +101,4 @@ const EditMovieForm = (props) => {
 	</div>);
 }
 
-export default EditMovieForm;
+export default AddMovieForm;
