@@ -1,6 +1,10 @@
 import React from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+
 
 const DeleteMovieModal = () => {
+
+	
     return (<div id="deleteMovieModal">
         <div className="modal-dialog">
             <div className="modal-content">
