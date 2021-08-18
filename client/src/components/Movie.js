@@ -1,3 +1,9 @@
+/**
+ * Tom Bielawski
+ * Lambda School WEB45 
+ * Unit 3.3.3 axios get/put/delete
+ * 8/18/2021
+**/
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
@@ -10,7 +16,7 @@ const Movie = (props) => {
     const { id } = useParams();
     const { push } = useHistory();
 
-    //Useeffect with call
+    //useEffect with call and id
     useEffect(()=>{
         axios.get(`http://localhost:5000/api/movies/${id}`)
             .then(res=>{

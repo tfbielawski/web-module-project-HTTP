@@ -1,3 +1,9 @@
+/**
+ * Tom Bielawski
+ * Lambda School WEB45 
+ * Unit 3.3.3 axios get/put/delete
+ * 8/18/2021
+**/
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
